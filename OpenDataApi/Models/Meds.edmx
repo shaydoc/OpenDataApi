@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MedsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BNFCodes">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.DrugPracticeAndChapterSpend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DrugPracticeAndChapterSpend">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PracNo" />
+            <PropertyRef Name="TotalSpend" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GPPractices">
+          <Key>
+            <PropertyRef Name="PracNo" />
+          </Key>
+          <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PartnershipNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="practiceName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Postcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="TelNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="LCG" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="GPPrescribing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRACTICE" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="varchar" MaxLength="50" />
+          <Property Name="Month" Type="varchar" MaxLength="50" />
+          <Property Name="VTM_NM" Type="varchar" MaxLength="500" />
+          <Property Name="VMP_NM" Type="varchar" MaxLength="500" />
+          <Property Name="AMP_NM" Type="varchar" MaxLength="500" />
+          <Property Name="Presentation" Type="varchar" MaxLength="500" />
+          <Property Name="Strength" Type="varchar" MaxLength="500" />
+          <Property Name="TotalItems" Type="varchar" MaxLength="50" />
+          <Property Name="TotalQuantity" Type="varchar" MaxLength="50" />
+          <Property Name="GrossCost" Type="varchar" MaxLength="50" />
+          <Property Name="ActualCost" Type="varchar" MaxLength="50" />
+          <Property Name="BNFCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+          <Property Name="BNFSection" Type="nvarchar" MaxLength="20" />
+          <Property Name="BNFParagraph" Type="nvarchar" MaxLength="20" />
+          <Property Name="BNFSubParagraph" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="MonthlyPrescriptionTotals">
+          <Key>
+            <PropertyRef Name="int" />
+          </Key>
+          <Property Name="int" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Yr" Type="int" Nullable="false" />
+          <Property Name="Mn" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TotalItems" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PracticeTotalsPerMonth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+          <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="TotalItems" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.BNFChapterDrugSpending' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BNFChapterDrugSpending">
+          
+          <Key>
+            <PropertyRef Name="Row" />
+          </Key>
+          <Property Name="Row" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.BNFChapterSpendSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BNFChapterSpendSummary">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.ChapterSpending' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ChapterSpending">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="MONTH" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="MONTH" Type="int" Nullable="false" />
+          <Property Name="LCG" Type="nvarchar" MaxLength="255" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemsPrescribed" Type="int" />
+          <Property Name="TotalSpent" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.RegionPracticeDrugTotalSpend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RegionPracticeDrugTotalSpend">
+          <Key>
+            <PropertyRef Name="PracNo" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="TotalSpend" />
+          </Key>
+          <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PartnershipNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="practiceName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Postcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="TelNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="LCG" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.RegionSurgeryBNFSpendSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RegionSurgeryBNFSpendSummary">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="region" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="practiceName" Type="nvarchar" MaxLength="255" />
+          <Property Name="addr1" Type="nvarchar" MaxLength="255" />
+          <Property Name="addr2" Type="nvarchar" MaxLength="255" />
+          <Property Name="addr3" Type="nvarchar" MaxLength="255" />
+          <Property Name="postcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="amount" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="MedsModelStoreContainer">
+          <EntitySet Name="BNFCodes" EntityType="Self.BNFCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GPPractices" EntityType="Self.GPPractices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GPPrescribing" EntityType="Self.GPPrescribing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyPrescriptionTotals" EntityType="Self.MonthlyPrescriptionTotals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PracticeTotalsPerMonth" EntityType="Self.PracticeTotalsPerMonth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrugPracticeAndChapterSpend" EntityType="Self.DrugPracticeAndChapterSpend" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DrugPracticeAndChapterSpend].[Id] AS [Id], 
+    [DrugPracticeAndChapterSpend].[PracNo] AS [PracNo], 
+    [DrugPracticeAndChapterSpend].[BNFChapter] AS [BNFChapter], 
+    [DrugPracticeAndChapterSpend].[DrugName] AS [DrugName], 
+    [DrugPracticeAndChapterSpend].[TotalSpend] AS [TotalSpend]
+    FROM [dbo].[DrugPracticeAndChapterSpend] AS [DrugPracticeAndChapterSpend]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BNFChapterDrugSpending" EntityType="Self.BNFChapterDrugSpending" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BNFChapterDrugSpending].[Row] AS [Row], 
+    [BNFChapterDrugSpending].[Name] AS [Name], 
+    [BNFChapterDrugSpending].[DrugName] AS [DrugName], 
+    [BNFChapterDrugSpending].[TotalSpend] AS [TotalSpend]
+    FROM [dbo].[BNFChapterDrugSpending] AS [BNFChapterDrugSpending]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BNFChapterSpendSummary" EntityType="Self.BNFChapterSpendSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BNFChapterSpendSummary].[name] AS [name], 
+    [BNFChapterSpendSummary].[amount] AS [amount]
+    FROM [dbo].[BNFChapterSpendSummary] AS [BNFChapterSpendSummary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ChapterSpending" EntityType="Self.ChapterSpending" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ChapterSpending].[Year] AS [Year], 
+    [ChapterSpending].[MONTH] AS [MONTH], 
+    [ChapterSpending].[LCG] AS [LCG], 
+    [ChapterSpending].[Code] AS [Code], 
+    [ChapterSpending].[Name] AS [Name], 
+    [ChapterSpending].[ItemsPrescribed] AS [ItemsPrescribed], 
+    [ChapterSpending].[TotalSpent] AS [TotalSpent]
+    FROM [dbo].[ChapterSpending] AS [ChapterSpending]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RegionPracticeDrugTotalSpend" EntityType="Self.RegionPracticeDrugTotalSpend" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RegionPracticeDrugTotalSpend].[PracNo] AS [PracNo], 
+    [RegionPracticeDrugTotalSpend].[PartnershipNo] AS [PartnershipNo], 
+    [RegionPracticeDrugTotalSpend].[practiceName] AS [practiceName], 
+    [RegionPracticeDrugTotalSpend].[Address1] AS [Address1], 
+    [RegionPracticeDrugTotalSpend].[Address2] AS [Address2], 
+    [RegionPracticeDrugTotalSpend].[Address3] AS [Address3], 
+    [RegionPracticeDrugTotalSpend].[Postcode] AS [Postcode], 
+    [RegionPracticeDrugTotalSpend].[TelNo] AS [TelNo], 
+    [RegionPracticeDrugTotalSpend].[LCG] AS [LCG], 
+    [RegionPracticeDrugTotalSpend].[Name] AS [Name], 
+    [RegionPracticeDrugTotalSpend].[DrugName] AS [DrugName], 
+    [RegionPracticeDrugTotalSpend].[TotalSpend] AS [TotalSpend]
+    FROM [dbo].[RegionPracticeDrugTotalSpend] AS [RegionPracticeDrugTotalSpend]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RegionSurgeryBNFSpendSummary" EntityType="Self.RegionSurgeryBNFSpendSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RegionSurgeryBNFSpendSummary].[region] AS [region], 
+    [RegionSurgeryBNFSpendSummary].[Name] AS [Name], 
+    [RegionSurgeryBNFSpendSummary].[practiceName] AS [practiceName], 
+    [RegionSurgeryBNFSpendSummary].[addr1] AS [addr1], 
+    [RegionSurgeryBNFSpendSummary].[addr2] AS [addr2], 
+    [RegionSurgeryBNFSpendSummary].[addr3] AS [addr3], 
+    [RegionSurgeryBNFSpendSummary].[postcode] AS [postcode], 
+    [RegionSurgeryBNFSpendSummary].[amount] AS [amount]
+    FROM [dbo].[RegionSurgeryBNFSpendSummary] AS [RegionSurgeryBNFSpendSummary]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BNFCode">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GPPractice">
+          <Key>
+            <PropertyRef Name="PracNo" />
+          </Key>
+          <Property Name="PracNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PartnershipNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="practiceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TelNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LCG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GPPrescribing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRACTICE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VTM_NM" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VMP_NM" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AMP_NM" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Presentation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Strength" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TotalItems" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GrossCost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActualCost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BNFCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BNFChapter" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BNFSection" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BNFParagraph" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BNFSubParagraph" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MonthlyPrescriptionTotal">
+          <Key>
+            <PropertyRef Name="int" />
+          </Key>
+          <Property Name="int" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Yr" Type="Int32" Nullable="false" />
+          <Property Name="Mn" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalItems" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PracticeTotalsPerMonth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="BNFChapter" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSpend" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="TotalItems" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DrugPracticeAndChapterSpend">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PracNo" />
+            <PropertyRef Name="TotalSpend" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BNFChapter" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DrugName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSpend" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BNFChapterDrugSpending">
+          <Key>
+            <PropertyRef Name="Row" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DrugName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSpend" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Row" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BNFChapterSpendSummary">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="ChapterSpending">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="MONTH" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="MONTH" Type="Int32" Nullable="false" />
+          <Property Name="LCG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemsPrescribed" Type="Int32" />
+          <Property Name="TotalSpent" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="RegionPracticeDrugTotalSpend">
+          <Key>
+            <PropertyRef Name="PracNo" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="TotalSpend" />
+          </Key>
+          <Property Name="PracNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PartnershipNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="practiceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TelNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LCG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DrugName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSpend" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegionSurgeryBNFSpendSummary">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="region" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="practiceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="addr1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="addr2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="addr3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="MedsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BNFCodes" EntityType="Self.BNFCode" />
+          <EntitySet Name="GPPractices" EntityType="Self.GPPractice" />
+          <EntitySet Name="GPPrescribings" EntityType="Self.GPPrescribing" />
+          <EntitySet Name="MonthlyPrescriptionTotals" EntityType="Self.MonthlyPrescriptionTotal" />
+          <EntitySet Name="PracticeTotalsPerMonths" EntityType="Self.PracticeTotalsPerMonth" />
+          <EntitySet Name="DrugPracticeAndChapterSpends" EntityType="Self.DrugPracticeAndChapterSpend" />
+          <EntitySet Name="BNFChapterDrugSpendings" EntityType="Self.BNFChapterDrugSpending" />
+          <EntitySet Name="BNFChapterSpendSummaries" EntityType="Self.BNFChapterSpendSummary" />
+          <EntitySet Name="ChapterSpendings" EntityType="Self.ChapterSpending" />
+          <EntitySet Name="RegionPracticeDrugTotalSpends" EntityType="Self.RegionPracticeDrugTotalSpend" />
+          <EntitySet Name="RegionSurgeryBNFSpendSummaries" EntityType="Self.RegionSurgeryBNFSpendSummary" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedsModelStoreContainer" CdmEntityContainer="MedsEntities">
+          <EntitySetMapping Name="BNFCodes">
+            <EntityTypeMapping TypeName="MedsModel.BNFCode">
+              <MappingFragment StoreEntitySet="BNFCodes">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPPractices">
+            <EntityTypeMapping TypeName="MedsModel.GPPractice">
+              <MappingFragment StoreEntitySet="GPPractices">
+                <ScalarProperty Name="PracNo" ColumnName="PracNo" />
+                <ScalarProperty Name="PartnershipNo" ColumnName="PartnershipNo" />
+                <ScalarProperty Name="practiceName" ColumnName="practiceName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="LCG" ColumnName="LCG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPPrescribings">
+            <EntityTypeMapping TypeName="MedsModel.GPPrescribing">
+              <MappingFragment StoreEntitySet="GPPrescribing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PRACTICE" ColumnName="PRACTICE" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="VTM_NM" ColumnName="VTM_NM" />
+                <ScalarProperty Name="VMP_NM" ColumnName="VMP_NM" />
+                <ScalarProperty Name="AMP_NM" ColumnName="AMP_NM" />
+                <ScalarProperty Name="Presentation" ColumnName="Presentation" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="GrossCost" ColumnName="GrossCost" />
+                <ScalarProperty Name="ActualCost" ColumnName="ActualCost" />
+                <ScalarProperty Name="BNFCode" ColumnName="BNFCode" />
+                <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+                <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+                <ScalarProperty Name="BNFParagraph" ColumnName="BNFParagraph" />
+                <ScalarProperty Name="BNFSubParagraph" ColumnName="BNFSubParagraph" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyPrescriptionTotals">
+            <EntityTypeMapping TypeName="MedsModel.MonthlyPrescriptionTotal">
+              <MappingFragment StoreEntitySet="MonthlyPrescriptionTotals">
+                <ScalarProperty Name="int" ColumnName="int" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Yr" ColumnName="Yr" />
+                <ScalarProperty Name="Mn" ColumnName="Mn" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PracticeTotalsPerMonths">
+            <EntityTypeMapping TypeName="MedsModel.PracticeTotalsPerMonth">
+              <MappingFragment StoreEntitySet="PracticeTotalsPerMonth">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PracNo" ColumnName="PracNo" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+                <ScalarProperty Name="TotalSpend" ColumnName="TotalSpend" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrugPracticeAndChapterSpends">
+            <EntityTypeMapping TypeName="MedsModel.DrugPracticeAndChapterSpend">
+              <MappingFragment StoreEntitySet="DrugPracticeAndChapterSpend">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PracNo" ColumnName="PracNo" />
+                <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="TotalSpend" ColumnName="TotalSpend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BNFChapterDrugSpendings">
+            <EntityTypeMapping TypeName="MedsModel.BNFChapterDrugSpending">
+              <MappingFragment StoreEntitySet="BNFChapterDrugSpending">
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="TotalSpend" ColumnName="TotalSpend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BNFChapterSpendSummaries">
+            <EntityTypeMapping TypeName="MedsModel.BNFChapterSpendSummary">
+              <MappingFragment StoreEntitySet="BNFChapterSpendSummary">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChapterSpendings">
+            <EntityTypeMapping TypeName="MedsModel.ChapterSpending">
+              <MappingFragment StoreEntitySet="ChapterSpending">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="MONTH" ColumnName="MONTH" />
+                <ScalarProperty Name="LCG" ColumnName="LCG" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemsPrescribed" ColumnName="ItemsPrescribed" />
+                <ScalarProperty Name="TotalSpent" ColumnName="TotalSpent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionPracticeDrugTotalSpends">
+            <EntityTypeMapping TypeName="MedsModel.RegionPracticeDrugTotalSpend">
+              <MappingFragment StoreEntitySet="RegionPracticeDrugTotalSpend">
+                <ScalarProperty Name="PracNo" ColumnName="PracNo" />
+                <ScalarProperty Name="PartnershipNo" ColumnName="PartnershipNo" />
+                <ScalarProperty Name="practiceName" ColumnName="practiceName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="LCG" ColumnName="LCG" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="TotalSpend" ColumnName="TotalSpend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionSurgeryBNFSpendSummaries">
+            <EntityTypeMapping TypeName="MedsModel.RegionSurgeryBNFSpendSummary">
+              <MappingFragment StoreEntitySet="RegionSurgeryBNFSpendSummary">
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="practiceName" ColumnName="practiceName" />
+                <ScalarProperty Name="addr1" ColumnName="addr1" />
+                <ScalarProperty Name="addr2" ColumnName="addr2" />
+                <ScalarProperty Name="addr3" ColumnName="addr3" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BNFCodes">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.DrugPracticeAndChapterSpend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DrugPracticeAndChapterSpend">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="PracNo" />
+      <PropertyRef Name="TotalSpend" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+    <Property Name="DrugName" Type="nvarchar" MaxLength="255" />
+    <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GPPractices">
+    <Key>
+      <PropertyRef Name="PracNo" />
+    </Key>
+    <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="PartnershipNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="practiceName" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+    <Property Name="Postcode" Type="nvarchar" MaxLength="255" />
+    <Property Name="TelNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="LCG" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="GPPrescribing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRACTICE" Type="varchar" MaxLength="50" />
+    <Property Name="Year" Type="varchar" MaxLength="50" />
+    <Property Name="Month" Type="varchar" MaxLength="50" />
+    <Property Name="VTM_NM" Type="varchar" MaxLength="500" />
+    <Property Name="VMP_NM" Type="varchar" MaxLength="500" />
+    <Property Name="AMP_NM" Type="varchar" MaxLength="500" />
+    <Property Name="Presentation" Type="varchar" MaxLength="500" />
+    <Property Name="Strength" Type="varchar" MaxLength="500" />
+    <Property Name="TotalItems" Type="varchar" MaxLength="50" />
+    <Property Name="TotalQuantity" Type="varchar" MaxLength="50" />
+    <Property Name="GrossCost" Type="varchar" MaxLength="50" />
+    <Property Name="ActualCost" Type="varchar" MaxLength="50" />
+    <Property Name="BNFCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFSection" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFParagraph" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFSubParagraph" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="MonthlyPrescriptionTotals">
+    <Key>
+      <PropertyRef Name="int" />
+    </Key>
+    <Property Name="int" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Yr" Type="int" Nullable="false" />
+    <Property Name="Mn" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="TotalItems" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PracticeTotalsPerMonth">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Month" Type="int" Nullable="false" />
+    <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+    <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="TotalItems" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.BNFChapterDrugSpending' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BNFChapterDrugSpending">
+    <Key>
+      <PropertyRef Name="Row" />
+    </Key>
+    <Property Name="Row" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DrugName" Type="nvarchar" MaxLength="255" />
+    <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.BNFChapterSpendSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BNFChapterSpendSummary">
+    <Key>
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.ChapterSpending' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ChapterSpending">
+    <Key>
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="MONTH" />
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="MONTH" Type="int" Nullable="false" />
+    <Property Name="LCG" Type="nvarchar" MaxLength="255" />
+    <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ItemsPrescribed" Type="int" />
+    <Property Name="TotalSpent" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.RegionPracticeDrugTotalSpend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RegionPracticeDrugTotalSpend">
+    <Key>
+      <PropertyRef Name="PracNo" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="TotalSpend" />
+    </Key>
+    <Property Name="PracNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="PartnershipNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="practiceName" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+    <Property Name="Postcode" Type="nvarchar" MaxLength="255" />
+    <Property Name="TelNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="LCG" Type="nvarchar" MaxLength="255" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DrugName" Type="nvarchar" MaxLength="255" />
+    <Property Name="TotalSpend" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.RegionSurgeryBNFSpendSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RegionSurgeryBNFSpendSummary">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="region" Type="nvarchar" MaxLength="255" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="practiceName" Type="nvarchar" MaxLength="255" />
+    <Property Name="addr1" Type="nvarchar" MaxLength="255" />
+    <Property Name="addr2" Type="nvarchar" MaxLength="255" />
+    <Property Name="addr3" Type="nvarchar" MaxLength="255" />
+    <Property Name="postcode" Type="nvarchar" MaxLength="255" />
+    <Property Name="amount" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <EntityContainer Name="MedsModelStoreContainer">
+    <EntitySet Name="BNFCodes" EntityType="Self.BNFCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GPPractices" EntityType="Self.GPPractices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GPPrescribing" EntityType="Self.GPPrescribing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MonthlyPrescriptionTotals" EntityType="Self.MonthlyPrescriptionTotals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PracticeTotalsPerMonth" EntityType="Self.PracticeTotalsPerMonth" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DrugPracticeAndChapterSpend" EntityType="Self.DrugPracticeAndChapterSpend" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DrugPracticeAndChapterSpend].[Id] AS [Id], 
+    [DrugPracticeAndChapterSpend].[PracNo] AS [PracNo], 
+    [DrugPracticeAndChapterSpend].[BNFChapter] AS [BNFChapter], 
+    [DrugPracticeAndChapterSpend].[DrugName] AS [DrugName], 
+    [DrugPracticeAndChapterSpend].[TotalSpend] AS [TotalSpend]
+    FROM [dbo].[DrugPracticeAndChapterSpend] AS [DrugPracticeAndChapterSpend]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BNFChapterDrugSpending" EntityType="Self.BNFChapterDrugSpending" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BNFChapterDrugSpending].[Row] AS [Row], 
+    [BNFChapterDrugSpending].[Name] AS [Name], 
+    [BNFChapterDrugSpending].[DrugName] AS [DrugName], 
+    [BNFChapterDrugSpending].[TotalSpend] AS [TotalSpend]
+    FROM [dbo].[BNFChapterDrugSpending] AS [BNFChapterDrugSpending]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BNFChapterSpendSummary" EntityType="Self.BNFChapterSpendSummary" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BNFChapterSpendSummary].[name] AS [name], 
+    [BNFChapterSpendSummary].[amount] AS [amount]
+    FROM [dbo].[BNFChapterSpendSummary] AS [BNFChapterSpendSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ChapterSpending" EntityType="Self.ChapterSpending" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ChapterSpending].[Year] AS [Year], 
+    [ChapterSpending].[MONTH] AS [MONTH], 
+    [ChapterSpending].[LCG] AS [LCG], 
+    [ChapterSpending].[Code] AS [Code], 
+    [ChapterSpending].[Name] AS [Name], 
+    [ChapterSpending].[ItemsPrescribed] AS [ItemsPrescribed], 
+    [ChapterSpending].[TotalSpent] AS [TotalSpent]
+    FROM [dbo].[ChapterSpending] AS [ChapterSpending]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RegionPracticeDrugTotalSpend" EntityType="Self.RegionPracticeDrugTotalSpend" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RegionPracticeDrugTotalSpend].[PracNo] AS [PracNo], 
+    [RegionPracticeDrugTotalSpend].[PartnershipNo] AS [PartnershipNo], 
+    [RegionPracticeDrugTotalSpend].[practiceName] AS [practiceName], 
+    [RegionPracticeDrugTotalSpend].[Address1] AS [Address1], 
+    [RegionPracticeDrugTotalSpend].[Address2] AS [Address2], 
+    [RegionPracticeDrugTotalSpend].[Address3] AS [Address3], 
+    [RegionPracticeDrugTotalSpend].[Postcode] AS [Postcode], 
+    [RegionPracticeDrugTotalSpend].[TelNo] AS [TelNo], 
+    [RegionPracticeDrugTotalSpend].[LCG] AS [LCG], 
+    [RegionPracticeDrugTotalSpend].[Name] AS [Name], 
+    [RegionPracticeDrugTotalSpend].[DrugName] AS [DrugName], 
+    [RegionPracticeDrugTotalSpend].[TotalSpend] AS [TotalSpend]
+    FROM [dbo].[RegionPracticeDrugTotalSpend] AS [RegionPracticeDrugTotalSpend]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RegionSurgeryBNFSpendSummary" EntityType="Self.RegionSurgeryBNFSpendSummary" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RegionSurgeryBNFSpendSummary].[region] AS [region], 
+    [RegionSurgeryBNFSpendSummary].[Name] AS [Name], 
+    [RegionSurgeryBNFSpendSummary].[practiceName] AS [practiceName], 
+    [RegionSurgeryBNFSpendSummary].[addr1] AS [addr1], 
+    [RegionSurgeryBNFSpendSummary].[addr2] AS [addr2], 
+    [RegionSurgeryBNFSpendSummary].[addr3] AS [addr3], 
+    [RegionSurgeryBNFSpendSummary].[postcode] AS [postcode], 
+    [RegionSurgeryBNFSpendSummary].[amount] AS [amount]
+    FROM [dbo].[RegionSurgeryBNFSpendSummary] AS [RegionSurgeryBNFSpendSummary]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
