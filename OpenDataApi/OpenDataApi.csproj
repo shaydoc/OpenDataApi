@@ -217,11 +217,15 @@
     <Compile Include="Models\RegionSurgeryBNFSpendSummary.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vwPracticePartition.cs">
+      <DependentUpon>Meds.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <None Include="Properties\PublishProfiles\OpenDataNI - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OpenDataNI.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

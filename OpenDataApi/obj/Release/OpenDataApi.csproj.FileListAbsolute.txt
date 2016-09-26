@@ -36,3 +36,41 @@ c:\Users\seamusd\Documents\Visual Studio 2015\Projects\OpenDataApi\OpenDataApi\o
 c:\Users\seamusd\Documents\Visual Studio 2015\Projects\OpenDataApi\OpenDataApi\bin\System.Web.Cors.dll
 c:\Users\seamusd\Documents\Visual Studio 2015\Projects\OpenDataApi\OpenDataApi\bin\System.Web.Http.Cors.dll
 c:\Users\seamusd\Documents\Visual Studio 2015\Projects\OpenDataApi\OpenDataApi\bin\System.Web.Http.Cors.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\ApplicationInsights.config
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\OpenDataApi.dll.config
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\OpenDataApi.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\OpenDataApi.pdb
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\EntityFramework.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\EntityFramework.SqlServer.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.Web.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.ApplicationInsights.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Newtonsoft.Json.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Swashbuckle.Core.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Net.Http.Formatting.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Cors.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Http.Cors.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Http.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Http.WebHost.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\WebActivatorEx.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\EntityFramework.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\EntityFramework.SqlServer.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.Web.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Microsoft.ApplicationInsights.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Http.Cors.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\Newtonsoft.Json.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Net.Http.Formatting.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Http.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\bin\System.Web.Http.WebHost.xml
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\obj\Release\OpenDataApi.dll
+C:\Users\shaydoc\Source\Repos\OpenDataApi\OpenDataApi\obj\Release\OpenDataApi.pdb

@@ -146,5 +146,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vwPracticePartitions">
+      <EntityTypeMapping TypeName="MedsModel.vwPracticePartition">
+        <MappingFragment StoreEntitySet="vwPracticePartition">
+          <ScalarProperty Name="PracticeNo" ColumnName="PracticeNo" />
+          <ScalarProperty Name="BNFSubParagraph" ColumnName="BNFSubParagraph" />
+          <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+          <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+          <ScalarProperty Name="BNFCode" ColumnName="BNFCode" />
+          <ScalarProperty Name="ActualCost" ColumnName="ActualCost" />
+          <ScalarProperty Name="GrossCost" ColumnName="GrossCost" />
+          <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+          <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+          <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

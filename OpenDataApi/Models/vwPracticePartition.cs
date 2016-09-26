@@ -15,18 +15,34 @@ namespace OpenDataApi.Models
 using System;
     using System.Collections.Generic;
     
-public partial class DrugPracticeAndChapterSpend
+public partial class vwPracticePartition
 {
 
     public int Id { get; set; }
 
-    public string PracNo { get; set; }
+    public string Year { get; set; }
 
-    public string BNFChapter { get; set; }
+    public string Month { get; set; }
 
     public string DrugName { get; set; }
 
-    public decimal TotalSpend { get; set; }
+    public string TotalItems { get; set; }
+
+    public string TotalQuantity { get; set; }
+
+    public string GrossCost { get; set; }
+
+    public string ActualCost { get; set; }
+
+    public string BNFCode { get; set; }
+
+    public string BNFChapter { get; set; }
+
+    public string BNFSection { get; set; }
+
+    public string BNFSubParagraph { get; set; }
+
+    public string PracticeNo { get; set; }
 
 }
 

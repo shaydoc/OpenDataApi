@@ -153,6 +153,26 @@ warning 6002: The table/view 'Meds.dbo.RegionSurgeryBNFSpendSummary' does not ha
     <Property Name="postcode" Type="nvarchar" MaxLength="255" />
     <Property Name="amount" Type="decimal" Precision="38" Scale="2" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwPracticePartition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PracticeNo" Type="varchar" MaxLength="50" />
+    <Property Name="Year" Type="varchar" MaxLength="50" />
+    <Property Name="Month" Type="varchar" MaxLength="50" />
+    <Property Name="DrugName" Type="varchar" MaxLength="500" />
+    <Property Name="TotalItems" Type="varchar" MaxLength="50" />
+    <Property Name="TotalQuantity" Type="varchar" MaxLength="50" />
+    <Property Name="GrossCost" Type="varchar" MaxLength="50" />
+    <Property Name="ActualCost" Type="varchar" MaxLength="50" />
+    <Property Name="BNFCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFChapter" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFSection" Type="nvarchar" MaxLength="20" />
+    <Property Name="BNFSubParagraph" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityContainer Name="MedsModelStoreContainer">
     <EntitySet Name="BNFCodes" EntityType="Self.BNFCodes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GPPractices" EntityType="Self.GPPractices" Schema="dbo" store:Type="Tables" />
@@ -220,6 +240,23 @@ warning 6002: The table/view 'Meds.dbo.RegionSurgeryBNFSpendSummary' does not ha
     [RegionSurgeryBNFSpendSummary].[postcode] AS [postcode], 
     [RegionSurgeryBNFSpendSummary].[amount] AS [amount]
     FROM [dbo].[RegionSurgeryBNFSpendSummary] AS [RegionSurgeryBNFSpendSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPracticePartition" EntityType="Self.vwPracticePartition" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwPracticePartition].[Id] AS [Id], 
+    [vwPracticePartition].[PracticeNo] AS [PracticeNo], 
+    [vwPracticePartition].[Year] AS [Year], 
+    [vwPracticePartition].[Month] AS [Month], 
+    [vwPracticePartition].[DrugName] AS [DrugName], 
+    [vwPracticePartition].[TotalItems] AS [TotalItems], 
+    [vwPracticePartition].[TotalQuantity] AS [TotalQuantity], 
+    [vwPracticePartition].[GrossCost] AS [GrossCost], 
+    [vwPracticePartition].[ActualCost] AS [ActualCost], 
+    [vwPracticePartition].[BNFCode] AS [BNFCode], 
+    [vwPracticePartition].[BNFChapter] AS [BNFChapter], 
+    [vwPracticePartition].[BNFSection] AS [BNFSection], 
+    [vwPracticePartition].[BNFSubParagraph] AS [BNFSubParagraph]
+    FROM [dbo].[vwPracticePartition] AS [vwPracticePartition]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>
