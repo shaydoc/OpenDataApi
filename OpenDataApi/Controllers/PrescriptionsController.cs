@@ -72,8 +72,8 @@ namespace OpenDataApi.Controllers
 
                 var results =
                     m.DrugPracticeAndChapterSpends
-                    .Select(x=> new { bnfChapter = x.BNFChapter, drugName= x.DrugName })
-                    .Distinct()
+                    .Select(x=> new { bnfChapter = x.BNFChapter, drugName = x.DrugName.Replace(" + ","-and-") })
+                    .Distinct() 
                     .ToList();
 
                 HttpRuntime.Cache["Drugs"] = results;
@@ -114,6 +114,7 @@ namespace OpenDataApi.Controllers
         [Route("api/Prescriptions/{practiceId}/Drug/{drugName}")]
         public dynamic GetByDrug(string practiceId, string drugName)
         {
+            drugName = drugName.Replace("-and-", " + ");
             var cacheResults =
                 HttpRuntime.Cache[practiceId+drugName];
 
