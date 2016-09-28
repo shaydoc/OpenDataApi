@@ -165,5 +165,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetDrugUseBySuperOutputArea" FunctionName="MedsModel.Store.GetDrugUseBySuperOutputArea">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedsModel.GetDrugUseBySuperOutputArea_Result">
+          <ScalarProperty Name="Soa" ColumnName="Soa" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+          <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+          <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+          <ScalarProperty Name="BNFParagraph" ColumnName="BNFParagraph" />
+          <ScalarProperty Name="BNFSubParagraph" ColumnName="BNFSubParagraph" />
+          <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+          <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+          <ScalarProperty Name="TotalGrossCost" ColumnName="TotalGrossCost" />
+          <ScalarProperty Name="TotalActualCost" ColumnName="TotalActualCost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

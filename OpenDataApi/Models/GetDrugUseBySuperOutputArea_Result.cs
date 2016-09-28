@@ -10,13 +10,19 @@
 namespace OpenDataApi.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class BNFChapterDrugSpending
+    public partial class GetDrugUseBySuperOutputArea_Result
     {
+        public string Soa { get; set; }
         public string Name { get; set; }
         public string DrugName { get; set; }
-        public Nullable<decimal> TotalSpend { get; set; }
-        public long Row { get; set; }
+        public string BNFChapter { get; set; }
+        public string BNFSection { get; set; }
+        public string BNFParagraph { get; set; }
+        public string BNFSubParagraph { get; set; }
+        public Nullable<int> TotalItems { get; set; }
+        public Nullable<int> TotalQuantity { get; set; }
+        public Nullable<decimal> TotalGrossCost { get; set; }
+        public Nullable<decimal> TotalActualCost { get; set; }
     }
 }

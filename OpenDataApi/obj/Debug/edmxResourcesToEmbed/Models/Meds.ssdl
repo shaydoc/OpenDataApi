@@ -173,6 +173,11 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
     <Property Name="BNFSection" Type="nvarchar" MaxLength="20" />
     <Property Name="BNFSubParagraph" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <Function Name="GetDrugUseBySuperOutputArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DrugName" Type="varchar" Mode="In" />
+    <Parameter Name="Year" Type="varchar" Mode="In" />
+    <Parameter Name="Month" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="MedsModelStoreContainer">
     <EntitySet Name="BNFCodes" EntityType="Self.BNFCodes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GPPractices" EntityType="Self.GPPractices" Schema="dbo" store:Type="Tables" />

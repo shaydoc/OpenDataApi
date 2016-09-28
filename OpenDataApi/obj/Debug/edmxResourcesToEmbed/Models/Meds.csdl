@@ -154,6 +154,11 @@
     <EntitySet Name="RegionPracticeDrugTotalSpends" EntityType="Self.RegionPracticeDrugTotalSpend" />
     <EntitySet Name="RegionSurgeryBNFSpendSummaries" EntityType="Self.RegionSurgeryBNFSpendSummary" />
     <EntitySet Name="vwPracticePartitions" EntityType="MedsModel.vwPracticePartition" />
+    <FunctionImport Name="GetDrugUseBySuperOutputArea" ReturnType="Collection(MedsModel.GetDrugUseBySuperOutputArea_Result)">
+      <Parameter Name="DrugName" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
+      <Parameter Name="Month" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="vwPracticePartition">
     <Key>
@@ -173,4 +178,17 @@
     <Property Name="BNFSubParagraph" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="PracticeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <ComplexType Name="GetDrugUseBySuperOutputArea_Result">
+    <Property Type="String" Name="Soa" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DrugName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="BNFChapter" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BNFParagraph" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BNFSubParagraph" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="TotalItems" Nullable="true" />
+    <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+    <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
 </Schema>

@@ -157,4 +157,22 @@ namespace OpenDataApi.Controllers
             return cacheResults;
         }
     }
+
+
+    public class SOAController : ApiController
+    {
+        [CacheControl(MaxAge = 300)]
+        [Route("api/soa/{drugName}/{year}/{month}")]
+        public dynamic Get(string drugName, string year, string month)
+        {    
+            Models.MedsEntities m =
+                new Models.MedsEntities();
+
+            var results = m.GetDrugUseBySuperOutputArea(drugName, year, month);
+
+
+            return results;
+             
+        }
+    }
 }
