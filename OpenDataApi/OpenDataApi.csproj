@@ -186,6 +186,9 @@
     <Compile Include="Models\DrugPracticeAndChapterSpend.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetDrugUseByBNFChapterAndSectionBySuperOutputArea_Result.cs">
+      <DependentUpon>Meds.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetDrugUseBySuperOutputArea_Result.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>

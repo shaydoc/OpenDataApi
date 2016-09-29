@@ -162,8 +162,8 @@ namespace OpenDataApi.Controllers
     public class SOAController : ApiController
     {
         [CacheControl(MaxAge = 300)]
-        [Route("api/soa/{drugName}/{year}/{month}")]
-        public dynamic Get(string drugName, string year, string month)
+        [Route("api/soa/drug/{drugName}/{year}/{month}")]
+        public dynamic GetByDrug(string drugName, string year, string month)
         {    
             Models.MedsEntities m =
                 new Models.MedsEntities();
@@ -173,6 +173,20 @@ namespace OpenDataApi.Controllers
 
             return results;
              
+        }
+
+        [CacheControl(MaxAge = 300)]
+        [Route("api/soa/bnfchapter/{bnfChapter}/{bnfSection}/{year}/{month}")]
+        public dynamic GetByBNF(string bnfChapter, string bnfSection, string year, string month)
+        {
+            Models.MedsEntities m =
+                new Models.MedsEntities();
+
+            var results = m.GetDrugUseByBNFChapterAndSectionBySuperOutputArea(bnfChapter, bnfSection, year, month);
+
+
+            return results;
+
         }
     }
 }

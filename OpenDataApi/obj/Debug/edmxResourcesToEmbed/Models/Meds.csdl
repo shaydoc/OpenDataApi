@@ -159,6 +159,12 @@
       <Parameter Name="Year" Mode="In" Type="String" />
       <Parameter Name="Month" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetDrugUseByBNFChapterAndSectionBySuperOutputArea" ReturnType="Collection(MedsModel.GetDrugUseByBNFChapterAndSectionBySuperOutputArea_Result)">
+      <Parameter Name="BNFChapter" Mode="In" Type="String" />
+      <Parameter Name="BNFSection" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
+      <Parameter Name="Month" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="vwPracticePartition">
     <Key>
@@ -182,6 +188,19 @@
     <Property Type="String" Name="Soa" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="DrugName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="BNFChapter" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BNFParagraph" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BNFSubParagraph" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="TotalItems" Nullable="true" />
+    <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+    <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetDrugUseByBNFChapterAndSectionBySuperOutputArea_Result">
+    <Property Type="String" Name="Soa" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DrugName" Nullable="true" MaxLength="11" />
     <Property Type="String" Name="BNFChapter" Nullable="true" MaxLength="20" />
     <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
     <Property Type="String" Name="BNFParagraph" Nullable="true" MaxLength="20" />
