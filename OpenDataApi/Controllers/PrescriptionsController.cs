@@ -162,7 +162,7 @@ namespace OpenDataApi.Controllers
     public class SOAController : ApiController
     {
         [CacheControl(MaxAge = 300)]
-        [Route("api/soa/drug/{drugName}/{year}/{month}")]
+        [Route("api/soa/{drugName}/{year}/{month}")]
         public dynamic GetByDrug(string drugName, string year, string month)
         {    
             Models.MedsEntities m =
