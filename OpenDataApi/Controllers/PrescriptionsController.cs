@@ -192,5 +192,19 @@ namespace OpenDataApi.Controllers
             return results;
 
         }
+
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
+        [Route("api/soa/patient/bnfchapter/{bnfChapter}/{bnfSection}/{year}/{month}")]
+        public dynamic GetByBNFPatientRation(string bnfChapter, string bnfSection, string year, string month)
+        {
+            Models.MedsEntities m =
+                new Models.MedsEntities();
+
+            var results = m.GetDrugUseBySuperOutputAreaPatientRatio(bnfChapter, bnfSection, year, month);
+
+
+            return results;
+
+        }
     }
 }

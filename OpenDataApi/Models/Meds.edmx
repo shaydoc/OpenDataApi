@@ -190,6 +190,12 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Parameter Name="Year" Type="varchar" Mode="In" />
           <Parameter Name="Month" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetDrugUseBySuperOutputAreaPatientRatio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BNFChapter" Type="varchar" Mode="In" />
+          <Parameter Name="BNFSection" Type="varchar" Mode="In" />
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MedsModelStoreContainer">
           <EntitySet Name="BNFCodes" EntityType="Self.BNFCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GPPractices" EntityType="Self.GPPractices" Schema="dbo" store:Type="Tables" />
@@ -445,6 +451,12 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
             <Parameter Name="Year" Mode="In" Type="String" />
             <Parameter Name="Month" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetDrugUseBySuperOutputAreaPatientRatio" ReturnType="Collection(MedsModel.GetDrugUseBySuperOutputAreaPatientRatio_Result)">
+            <Parameter Name="BNFChapter" Mode="In" Type="String" />
+            <Parameter Name="BNFSection" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="vwPracticePartition">
           <Key>
@@ -485,6 +497,17 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="BNFParagraph" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="BNFSubParagraph" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+          <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetDrugUseBySuperOutputAreaPatientRatio_Result">
+          <Property Type="String" Name="Soa" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BNFChapter" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="TotalItemsPerPatient" Nullable="true" Precision="38" Scale="6" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
           <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
           <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
@@ -687,6 +710,21 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
                 <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
                 <ScalarProperty Name="BNFParagraph" ColumnName="BNFParagraph" />
                 <ScalarProperty Name="BNFSubParagraph" ColumnName="BNFSubParagraph" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TotalGrossCost" ColumnName="TotalGrossCost" />
+                <ScalarProperty Name="TotalActualCost" ColumnName="TotalActualCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDrugUseBySuperOutputAreaPatientRatio" FunctionName="MedsModel.Store.GetDrugUseBySuperOutputAreaPatientRatio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedsModel.GetDrugUseBySuperOutputAreaPatientRatio_Result">
+                <ScalarProperty Name="Soa" ColumnName="Soa" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+                <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+                <ScalarProperty Name="TotalItemsPerPatient" ColumnName="TotalItemsPerPatient" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="TotalGrossCost" ColumnName="TotalGrossCost" />

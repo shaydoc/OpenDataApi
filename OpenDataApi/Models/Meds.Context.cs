@@ -77,5 +77,26 @@ namespace OpenDataApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseByBNFChapterAndSectionBySuperOutputArea_Result>("GetDrugUseByBNFChapterAndSectionBySuperOutputArea", bNFChapterParameter, bNFSectionParameter, yearParameter, monthParameter);
         }
+    
+        public virtual ObjectResult<GetDrugUseBySuperOutputAreaPatientRatio_Result> GetDrugUseBySuperOutputAreaPatientRatio(string bNFChapter, string bNFSection, string year, string month)
+        {
+            var bNFChapterParameter = bNFChapter != null ?
+                new ObjectParameter("BNFChapter", bNFChapter) :
+                new ObjectParameter("BNFChapter", typeof(string));
+    
+            var bNFSectionParameter = bNFSection != null ?
+                new ObjectParameter("BNFSection", bNFSection) :
+                new ObjectParameter("BNFSection", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseBySuperOutputAreaPatientRatio_Result>("GetDrugUseBySuperOutputAreaPatientRatio", bNFChapterParameter, bNFSectionParameter, yearParameter, monthParameter);
+        }
     }
 }
