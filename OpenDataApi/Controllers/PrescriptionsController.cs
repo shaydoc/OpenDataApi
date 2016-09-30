@@ -7,35 +7,39 @@ using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
+using WebApi.OutputCache.V2;
 
 namespace OpenDataApi.Controllers
 {
-    public class CacheControlAttribute : System.Web.Http.Filters.ActionFilterAttribute
-    {
-        public int MaxAge { get; set; }
+    //public class CacheControlAttribute : System.Web.Http.Filters.ActionFilterAttribute
+    //{
+    //    public int MaxAge { get; set; }
 
-        public CacheControlAttribute()
-        {
-            MaxAge = 3600;
-        }
+    //    public CacheControlAttribute()
+    //    {
+    //        MaxAge = 3600;
+    //    }
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {
-            if (actionExecutedContext.Response != null)
-                actionExecutedContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    MaxAge = TimeSpan.FromSeconds(MaxAge)
-                };
-            base.OnActionExecuted(actionExecutedContext);
-        }
+    //    public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+    //    {
+    //        if (actionExecutedContext.Response != null)
+    //            actionExecutedContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
+    //            {
+    //                Public = false,
+    //                MaxAge = TimeSpan.FromSeconds(MaxAge),
+                   
+    //            };
+
+    //            actionExecutedContext.Response.Content.Headers.Expires = DateTimeOffset.Now.AddSeconds(MaxAge);
+    //        base.OnActionExecuted(actionExecutedContext);
+    //    }
 
          
-    }
+    //}
 
     public class PracticesController : ApiController
     {
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/Practices")]
         public dynamic Get()
         {
@@ -58,7 +62,7 @@ namespace OpenDataApi.Controllers
     }
     public class DrugsController : ApiController
     {
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/Drugs")]
         public dynamic Get()
         {
@@ -87,7 +91,7 @@ namespace OpenDataApi.Controllers
 
     public class PrescriptionsController : ApiController
     {
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/Prescriptions/{practiceId}")]
         public dynamic Get(string practiceId)
         {
@@ -110,7 +114,7 @@ namespace OpenDataApi.Controllers
             return cacheResults;
         }
 
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/Prescriptions/{practiceId}/Drug/{drugName}")]
         public dynamic GetByDrug(string practiceId, string drugName)
         {
@@ -134,7 +138,7 @@ namespace OpenDataApi.Controllers
             return cacheResults;
         }
 
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/Prescriptions/{practiceId}/BNFChapter/{bnfChapter}")]
         public dynamic GetByChapter(string practiceId, string bnfChapter)
         {
@@ -161,7 +165,7 @@ namespace OpenDataApi.Controllers
 
     public class SOAController : ApiController
     {
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/soa/{drugName}/{year}/{month}")]
         public dynamic GetByDrug(string drugName, string year, string month)
         {    
@@ -175,7 +179,7 @@ namespace OpenDataApi.Controllers
              
         }
 
-        [CacheControl(MaxAge = 300)]
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/soa/bnfchapter/{bnfChapter}/{bnfSection}/{year}/{month}")]
         public dynamic GetByBNF(string bnfChapter, string bnfSection, string year, string month)
         {
