@@ -193,7 +193,7 @@ namespace OpenDataApi.Controllers
 
         }
 
-        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         [Route("api/soa/patient/bnfchapter/{bnfChapter}/{bnfSection}/{year}/{month}")]
         public dynamic GetByBNFPatientRation(string bnfChapter, string bnfSection, string year, string month)
         {
