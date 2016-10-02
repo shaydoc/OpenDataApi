@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
@@ -167,16 +168,17 @@ namespace OpenDataApi.Controllers
     {
         [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         [Route("api/diabetes")]
-        public dynamic GetDiabetesStats()
+        public IHttpActionResult GetDiabetesStats()
         {
             Models.MedsEntities m =
                 new Models.MedsEntities();
 
             var results = 
-                m.GetDrugUseByBNFChapterAndSectionByPracticeAllTime("6", "1");
+                m.GetCacheQuery("api/diabetes");
 
-
-            return results;
+            HttpResponseMessage msg = new HttpResponseMessage(HttpStatusCode.OK);
+            msg.Content = new StringContent(results.FirstOrDefault().Json, Encoding.UTF8, "aplication/json");
+            return ResponseMessage(msg);
 
         }
 

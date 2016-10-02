@@ -197,6 +197,9 @@
     <Compile Include="Models\DrugPracticeAndChapterSpend.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetCacheQuery_Result.cs">
+      <DependentUpon>Meds.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>

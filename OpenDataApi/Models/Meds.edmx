@@ -179,6 +179,9 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Property Name="BNFSection" Type="nvarchar" MaxLength="20" />
           <Property Name="BNFSubParagraph" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <Function Name="GetCacheQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="api" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetDrugUseByBNFChapterAndSectionByPractice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BNFChapter" Type="varchar" Mode="In" />
           <Parameter Name="BNFSection" Type="varchar" Mode="In" />
@@ -477,6 +480,9 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
             <Parameter Name="BNFChapter" Mode="In" Type="String" />
             <Parameter Name="BNFSection" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetCacheQuery" ReturnType="Collection(MedsModel.GetCacheQuery_Result)">
+            <Parameter Name="api" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="vwPracticePartition">
           <Key>
@@ -565,6 +571,12 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
           <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetCacheQuery_Result">
+          <Property Type="String" Name="Api" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Json" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -822,6 +834,16 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="TotalGrossCost" ColumnName="TotalGrossCost" />
                 <ScalarProperty Name="TotalActualCost" ColumnName="TotalActualCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCacheQuery" FunctionName="MedsModel.Store.GetCacheQuery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedsModel.GetCacheQuery_Result">
+                <ScalarProperty Name="Api" ColumnName="Api" />
+                <ScalarProperty Name="Json" ColumnName="Json" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

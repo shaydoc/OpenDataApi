@@ -179,6 +179,18 @@ public partial class MedsEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result>("GetDrugUseByBNFChapterAndSectionByPracticeAllTime", bNFChapterParameter, bNFSectionParameter);
     }
 
+
+    public virtual ObjectResult<GetCacheQuery_Result> GetCacheQuery(string api)
+    {
+
+        var apiParameter = api != null ?
+            new ObjectParameter("api", api) :
+            new ObjectParameter("api", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCacheQuery_Result>("GetCacheQuery", apiParameter);
+    }
+
 }
 
 }
