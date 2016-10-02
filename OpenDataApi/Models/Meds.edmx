@@ -179,6 +179,16 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Property Name="BNFSection" Type="nvarchar" MaxLength="20" />
           <Property Name="BNFSubParagraph" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <Function Name="GetDrugUseByBNFChapterAndSectionByPractice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BNFChapter" Type="varchar" Mode="In" />
+          <Parameter Name="BNFSection" Type="varchar" Mode="In" />
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetDrugUseByBNFChapterAndSectionByPracticeAllTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BNFChapter" Type="varchar" Mode="In" />
+          <Parameter Name="BNFSection" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetDrugUseByBNFChapterAndSectionBySuperOutputArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BNFChapter" Type="varchar" Mode="In" />
           <Parameter Name="BNFSection" Type="varchar" Mode="In" />
@@ -457,6 +467,16 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
             <Parameter Name="Year" Mode="In" Type="String" />
             <Parameter Name="Month" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetDrugUseByBNFChapterAndSectionByPractice" ReturnType="Collection(MedsModel.GetDrugUseByBNFChapterAndSectionByPractice_Result)">
+            <Parameter Name="BNFChapter" Mode="In" Type="String" />
+            <Parameter Name="BNFSection" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetDrugUseByBNFChapterAndSectionByPracticeAllTime" ReturnType="Collection(MedsModel.GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result)">
+            <Parameter Name="BNFChapter" Mode="In" Type="String" />
+            <Parameter Name="BNFSection" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="vwPracticePartition">
           <Key>
@@ -513,6 +533,38 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Int32" Name="RegisteredPatients" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetDrugUseByBNFChapterAndSectionByPractice_Result">
+          <Property Type="String" Name="practiceName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Postcode" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BNFChapter" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="RegisteredPatients" Nullable="false" />
+          <Property Type="Decimal" Name="TotalItemsPerPatient" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+          <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result">
+          <Property Type="String" Name="practiceName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Postcode" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BNFChapter" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BNFSection" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="RegisteredPatients" Nullable="false" />
+          <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Month" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalItemsPerPatient" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+          <Property Type="Decimal" Name="TotalGrossCost" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalActualCost" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -725,6 +777,46 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
                 <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+                <ScalarProperty Name="TotalItemsPerPatient" ColumnName="TotalItemsPerPatient" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TotalGrossCost" ColumnName="TotalGrossCost" />
+                <ScalarProperty Name="TotalActualCost" ColumnName="TotalActualCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDrugUseByBNFChapterAndSectionByPractice" FunctionName="MedsModel.Store.GetDrugUseByBNFChapterAndSectionByPractice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedsModel.GetDrugUseByBNFChapterAndSectionByPractice_Result">
+                <ScalarProperty Name="practiceName" ColumnName="practiceName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+                <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+                <ScalarProperty Name="RegisteredPatients" ColumnName="RegisteredPatients" />
+                <ScalarProperty Name="TotalItemsPerPatient" ColumnName="TotalItemsPerPatient" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TotalGrossCost" ColumnName="TotalGrossCost" />
+                <ScalarProperty Name="TotalActualCost" ColumnName="TotalActualCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDrugUseByBNFChapterAndSectionByPracticeAllTime" FunctionName="MedsModel.Store.GetDrugUseByBNFChapterAndSectionByPracticeAllTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedsModel.GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result">
+                <ScalarProperty Name="practiceName" ColumnName="practiceName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="BNFChapter" ColumnName="BNFChapter" />
+                <ScalarProperty Name="BNFSection" ColumnName="BNFSection" />
+                <ScalarProperty Name="RegisteredPatients" ColumnName="RegisteredPatients" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="TotalItemsPerPatient" ColumnName="TotalItemsPerPatient" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />

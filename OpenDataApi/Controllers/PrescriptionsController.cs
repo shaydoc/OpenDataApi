@@ -163,6 +163,39 @@ namespace OpenDataApi.Controllers
     }
 
 
+   public class BNFController: ApiController
+    {
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
+        [Route("api/diabetes")]
+        public dynamic GetDiabetesStats()
+        {
+            Models.MedsEntities m =
+                new Models.MedsEntities();
+
+            var results = 
+                m.GetDrugUseByBNFChapterAndSectionByPracticeAllTime("6", "1");
+
+
+            return results;
+
+        }
+
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
+        [Route("api/diabetes/{year}/{month}")]
+        public dynamic GetDiabetesMonthlyStats(string year, string month)
+        {
+            Models.MedsEntities m =
+                new Models.MedsEntities();
+
+            var results =
+                m.GetDrugUseByBNFChapterAndSectionByPractice("6", "1",year,month);
+
+
+            return results;
+
+        }
+    }
+
     public class SOAController : ApiController
     {
         [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
@@ -206,5 +239,7 @@ namespace OpenDataApi.Controllers
             return results;
 
         }
+
+
     }
 }

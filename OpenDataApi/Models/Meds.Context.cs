@@ -135,6 +135,50 @@ public partial class MedsEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseBySuperOutputAreaPatientRatio_Result>("GetDrugUseBySuperOutputAreaPatientRatio", bNFChapterParameter, bNFSectionParameter, yearParameter, monthParameter);
     }
 
+
+    public virtual ObjectResult<GetDrugUseByBNFChapterAndSectionByPractice_Result> GetDrugUseByBNFChapterAndSectionByPractice(string bNFChapter, string bNFSection, string year, string month)
+    {
+
+        var bNFChapterParameter = bNFChapter != null ?
+            new ObjectParameter("BNFChapter", bNFChapter) :
+            new ObjectParameter("BNFChapter", typeof(string));
+
+
+        var bNFSectionParameter = bNFSection != null ?
+            new ObjectParameter("BNFSection", bNFSection) :
+            new ObjectParameter("BNFSection", typeof(string));
+
+
+        var yearParameter = year != null ?
+            new ObjectParameter("Year", year) :
+            new ObjectParameter("Year", typeof(string));
+
+
+        var monthParameter = month != null ?
+            new ObjectParameter("Month", month) :
+            new ObjectParameter("Month", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseByBNFChapterAndSectionByPractice_Result>("GetDrugUseByBNFChapterAndSectionByPractice", bNFChapterParameter, bNFSectionParameter, yearParameter, monthParameter);
+    }
+
+
+    public virtual ObjectResult<GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result> GetDrugUseByBNFChapterAndSectionByPracticeAllTime(string bNFChapter, string bNFSection)
+    {
+
+        var bNFChapterParameter = bNFChapter != null ?
+            new ObjectParameter("BNFChapter", bNFChapter) :
+            new ObjectParameter("BNFChapter", typeof(string));
+
+
+        var bNFSectionParameter = bNFSection != null ?
+            new ObjectParameter("BNFSection", bNFSection) :
+            new ObjectParameter("BNFSection", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseByBNFChapterAndSectionByPracticeAllTime_Result>("GetDrugUseByBNFChapterAndSectionByPracticeAllTime", bNFChapterParameter, bNFSectionParameter);
+    }
+
 }
 
 }
