@@ -167,6 +167,24 @@ namespace OpenDataApi.Controllers
    public class BNFController: ApiController
     {
         [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
+        [Route("api/bnfsummary")]
+        public IHttpActionResult GetBNFSumary()
+        {
+            Models.MedsEntities m =
+                new Models.MedsEntities();
+
+            var results =
+                m.GetCacheQuery("api/bnfsummary");
+
+            HttpResponseMessage msg = new HttpResponseMessage(HttpStatusCode.OK);
+            msg.Content = new StringContent(results.FirstOrDefault().Json, Encoding.UTF8, "aplication/json");
+            return ResponseMessage(msg);
+
+        }
+
+
+
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         [Route("api/diabetes")]
         public IHttpActionResult GetDiabetesStats()
         {
@@ -181,6 +199,10 @@ namespace OpenDataApi.Controllers
             return ResponseMessage(msg);
 
         }
+
+
+
+
 
         [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         [Route("api/diabetes/{year}/{month}")]
