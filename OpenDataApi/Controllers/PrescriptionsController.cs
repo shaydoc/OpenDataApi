@@ -116,6 +116,31 @@ namespace OpenDataApi.Controllers
         }
 
         [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
+        [Route("api/Prescriptions/Drug/{drugName}")]
+        public dynamic GetByDrugTimeline(string drugName)
+        {
+            drugName = drugName.Replace("-and-", " + ");
+
+            var cacheResults =
+                HttpRuntime.Cache[drugName];
+
+            if (null == cacheResults)
+            {
+                Models.MedsEntities m = new Models.MedsEntities();
+
+                var results = m.GetDrugUseOverTime(drugName).ToList();
+
+                HttpRuntime.Cache[drugName] = results;
+
+                return results;
+            }
+
+            return cacheResults;
+
+
+        }
+
+        [CacheOutput(ClientTimeSpan = 100, ServerTimeSpan = 100)]
         [Route("api/Prescriptions/{practiceId}/Drug/{drugName}")]
         public dynamic GetByDrug(string practiceId, string drugName)
         {

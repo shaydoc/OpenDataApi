@@ -191,6 +191,18 @@ public partial class MedsEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCacheQuery_Result>("GetCacheQuery", apiParameter);
     }
 
+
+    public virtual ObjectResult<GetDrugUseOverTime_Result> GetDrugUseOverTime(string p_DrugName)
+    {
+
+        var p_DrugNameParameter = p_DrugName != null ?
+            new ObjectParameter("p_DrugName", p_DrugName) :
+            new ObjectParameter("p_DrugName", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDrugUseOverTime_Result>("GetDrugUseOverTime", p_DrugNameParameter);
+    }
+
 }
 
 }

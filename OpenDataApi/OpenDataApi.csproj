@@ -215,6 +215,9 @@
     <Compile Include="Models\GetDrugUseBySuperOutputArea_Result.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetDrugUseOverTime_Result.cs">
+      <DependentUpon>Meds.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GPPractice.cs">
       <DependentUpon>Meds.tt</DependentUpon>
     </Compile>

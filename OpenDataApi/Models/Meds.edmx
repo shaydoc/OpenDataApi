@@ -209,6 +209,9 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Parameter Name="Year" Type="varchar" Mode="In" />
           <Parameter Name="Month" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetDrugUseOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_DrugName" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MedsModelStoreContainer">
           <EntitySet Name="BNFCodes" EntityType="Self.BNFCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GPPractices" EntityType="Self.GPPractices" Schema="dbo" store:Type="Tables" />
@@ -481,7 +484,10 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
             <Parameter Name="BNFSection" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCacheQuery" ReturnType="Collection(MedsModel.GetCacheQuery_Result)">
-            <Parameter Name="api" Mode="In" Type="String" />
+          <Parameter Name="api" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetDrugUseOverTime" ReturnType="Collection(MedsModel.GetDrugUseOverTime_Result)">
+            <Parameter Name="p_DrugName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="vwPracticePartition">
@@ -577,6 +583,13 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
           <Property Type="String" Name="Json" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetDrugUseOverTime_Result">
+          <Property Type="String" Name="DrugName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Month" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Decimal" Name="TotalCost" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -844,6 +857,17 @@ warning 6002: The table/view 'Meds.dbo.vwPracticePartition' does not have a prim
                 <ScalarProperty Name="Json" ColumnName="Json" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDrugUseOverTime" FunctionName="MedsModel.Store.GetDrugUseOverTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedsModel.GetDrugUseOverTime_Result">
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
